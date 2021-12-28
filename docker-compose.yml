@@ -1,0 +1,20 @@
+version: '3.4' 
+services:
+  beneficiario-postgres:
+    image: postgres
+    environment:
+      POSTGRES_DB: db_beneficiario
+      POSTGRES_USER: beneficiario_web
+      POSTGRES_PASSWORD: "1234"
+    ports: 
+      - "5434:5432" 
+    restart: always
+  beneficiario-postgres-teste:
+    image: postgres
+    environment:
+      POSTGRES_DB: db_beneficiario_test
+      POSTGRES_USER: beneficiario_web
+      POSTGRES_PASSWORD: "1234"
+    ports: 
+      - "5435:5432" 
+    restart: always
