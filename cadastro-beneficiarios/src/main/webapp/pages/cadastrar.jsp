@@ -49,7 +49,8 @@
     </nav>
     <div class="container">
         <div class="row">
-            <form  action="<c:url value='/realizar-cadastro'/>">
+            <form id="formCadastrar" action="<c:url value='/realizar-cadastro'/>" method="POST">
+                <input type="hidden" id="nomeMunicipio"/>
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome Completo</label>
                     <input type="name" class="form-control" id="nome">
@@ -141,7 +142,7 @@
                     <div class="col">
                         <div class="mb-3">
                             <label for="municipio" class="form-label">Municipio</label>
-                            <select name="option" class="form-control" id="municipio"></select>
+                            <select name="option" class="form-control" id="municipio" onchange="obtemNomeMunicipio(this)"></select>
                         </div>
                     </div>
                     <div class="col">
@@ -224,6 +225,7 @@
                     function(resposta){
                         console.log(resposta);
                         const endereco = JSON.parse(resposta);
+                        document.querySelector("#nomeMunicipio").value = endereco.localidade;
                         document.querySelector("#endereco").value = endereco.logradouro;
                         document.querySelector("#bairro").value = endereco.bairro;
                         let comboEstado = document.querySelector("#estado");
@@ -281,7 +283,19 @@
                     console.log(erro);
                 },
             )
-        } 
+        }
+
+        function obtemNomeMunicipio(){
+            let municipios = document.querySelector("#municipio");
+            let municipioSelecionado = document.querySelector("#municipio").value;
+            console.log(selectMunicipio.text);
+            for (let i = 0; i < municipios.length; i++) {
+                const municipio = municipios[i];
+                if(municipio.value === municipioSelecionado){
+                    municipio.text = document.querySelector("#nomeMunicipio").value;
+                }
+            }
+        }
     </script>
 </body>
 

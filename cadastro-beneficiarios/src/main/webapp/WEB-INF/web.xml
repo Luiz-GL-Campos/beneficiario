@@ -41,7 +41,7 @@
       RealizarCadastro
     </servlet-name>
     <servlet-class>
-      br.gov.incra.beneficiarios.servlet.RealizarCadastroServlet
+      br.gov.incra.beneficiario.servlet.RealizarCadastroServlet
     </servlet-class>
   </servlet>
   <servlet-mapping>
