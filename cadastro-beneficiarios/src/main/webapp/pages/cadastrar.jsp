@@ -10,14 +10,6 @@
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous">
     </script>
-    <script type="text/javascript">
-        function consultaCep(){
-            let cep = document.querySelector("#cep").value;
-            if (cep.length === 8) {
-                console.log(cep);
-            }
-        }
-    </script>
 </head>
 
 <body>
@@ -57,7 +49,7 @@
     </nav>
     <div class="container">
         <div class="row">
-            <form>
+            <form  action="<c:url value='/realizar-cadastro'/>">
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome Completo</label>
                     <input type="name" class="form-control" id="nome">
@@ -97,7 +89,7 @@
                 <div class="row">
                     <div class="col">
                         <label for="genero" class="form-label">Genero</label>
-                        <select class="form-select" aria-label="Default select example">
+                        <select id="selectGenero" class="form-select" aria-label="Default select example">
                             <c:forEach var="genero" items="${generos}">                              
                                 <option value="genero.idGenero"><c:out value="${genero.tipoGenero}"/></option>                                  
                             </c:forEach>
@@ -105,7 +97,7 @@
                     </div>
                     <div class="col">
                         <label for="nivelEscolaridade" class="form-label">Nivel Escolaridade</label>
-                        <select class="form-select" aria-label="Default select example">
+                        <select id="selectNEscolaridade" class="form-select" aria-label="Default select example">
                             <c:forEach var="escolaridade" items="${escolaridades}">                              
                                 <option value="escolaridade.idEscolaridade"><c:out value="${escolaridade.nivelEscolaridade}"/></option>                                  
                             </c:forEach>
@@ -113,7 +105,7 @@
                     </div>
                     <div class="col">
                         <label for="tipoTelefone" class="form-label">Tipo de Telefone</label>
-                        <select class="form-select" aria-label="Default select example">
+                        <select id="selectTelefone" class="form-select" aria-label="Default select example">
                             <c:forEach var="tipoTelefone" items="${tiposTelefone}">                              
                                 <option value="tipoTelefone.idTipoTelefone"><c:out value="${tipoTelefone.descricaoTipoTelefone}"/></option>                                  
                             </c:forEach>
@@ -128,7 +120,7 @@
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
                   <div id="emailHelp" class="form-text">Nos nunca compartilharemos seu email com mas ninguem.</div>
                 </div>
                 <div class="row">
@@ -140,17 +132,16 @@
                     </div>
                     <div class="col">
                         <label for="uf" class="form-label">UF</label>
-                        <select class="form-select" aria-label="Default select example">
-                            <option selected>Estado</option>
+                        <select class="form-select" aria-label="Default select example" id="estado" onchange="consultaUf()">
                             <c:forEach var="estado" items="${estados}">                              
-                                <option value="estado.idEstado"><c:out value="${estado.siglaEstado}"/></option>                                  
+                                <option value="<c:out value='${estado.idEstado}'/>"><c:out value="${estado.siglaEstado}"/></option>                                  
                             </c:forEach>
                         </select>
                     </div>
                     <div class="col">
                         <div class="mb-3">
                             <label for="municipio" class="form-label">Municipio</label>
-                            <input type="text" class="form-control" id="municipio">
+                            <select name="option" class="form-control" id="municipio"></select>
                         </div>
                     </div>
                     <div class="col">
@@ -176,7 +167,7 @@
                     <div class="col">
                         <div class="mb-3">
                             <label for="banco" class="form-label">Banco</label>
-                            <select class="form-select" aria-label="Default select example">
+                            <select id="selectBanco" class="form-select" aria-label="Default select example">
                                 <c:forEach var="banco" items="${bancos}">                              
                                     <option value="banco.codBanco"><c:out value="${banco.nomeBanco}"/></option>                                  
                                 </c:forEach>
@@ -198,7 +189,7 @@
                     <div class="col">
                         <div class="mb-3">
                             <label for="tipoConta" class="form-label">Tipo de Conta</label>
-                            <select class="form-select" aria-label="Default select example">
+                            <select id="selectTipoConta" class="form-select" aria-label="Default select example">
                                 <c:forEach var="tipoConta" items="${tiposConta}">                              
                                     <option value="tipoConta.idTipoConta"><c:out value="${tipoConta.tipoConta}"/></option>                                  
                                 </c:forEach>
@@ -207,9 +198,91 @@
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Cadastrar</button>
-              </form>
+            </form>
         </div>
     </div>
+    <script type="text/javascript">
+        function consultaCep(){
+            let cep = document.querySelector("#cep").value;
+            if (cep.length === 8) {
+                let consulta = new Promise(
+                    function(resolve, reject){
+                        let httpRequest = new XMLHttpRequest();
+                        httpRequest.open("GET", `https://viacep.com.br/ws/${cep}/json/`)
+                        httpRequest.onload = function() {
+                            if(httpRequest.status === 200){
+                                resolve(httpRequest.response);
+                            } else {
+                                reject("lascou")
+                            }
+                            console.log(httpRequest.status);
+                        }
+                        httpRequest.send();
+                    }
+                );
+                consulta.then(
+                    function(resposta){
+                        console.log(resposta);
+                        const endereco = JSON.parse(resposta);
+                        document.querySelector("#endereco").value = endereco.logradouro;
+                        document.querySelector("#bairro").value = endereco.bairro;
+                        let comboEstado = document.querySelector("#estado");
+                        for (let i = 0; i < comboEstado.length; i++){
+                            const element = comboEstado[i];
+                            console.log(element.text);
+                            if(element.text === endereco.uf){
+                                document.querySelector("#estado").value = element.value;
+                                console.log(endereco);
+                            }
+                        }
+                    },
+                    function(erro){
+                        console.log(erro);
+                    },
+                )
+            }
+        }
+    
+        function consultaUf(ibge){
+            let uf = document.querySelector("#estado").value;
+            
+            let consulta = new Promise(
+                function (resolve, reject) {
+                    let httpRequest = new XMLHttpRequest();
+                    httpRequest.open("GET", `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${uf}/municipios`)
+                    httpRequest.onload = function(){
+                        if(httpRequest.status === 200){
+                            resolve(httpRequest.response);
+                        } else {
+                            reject("lascou")
+                        }
+                        console.log(httpRequest.status);
+                    }
+                    httpRequest.send();
+                }
+            );
+            consulta.then(
+                function(resposta){
+                    console.log(resposta);
+                    const endereco = JSON.parse(resposta);
+                    let comboMunicipio = document.querySelector("#municipio");
+                    comboMunicipio.length = 0;
+                    endereco.forEach(endereco => {
+                        let opcaoMunicipio = document.createElement("option");
+                        opcaoMunicipio.value = endereco.id;
+                        opcaoMunicipio.text = endereco.nome;
+                        comboMunicipio.add(opcaoMunicipio);
+                    });
+                    if(ibge){
+                        document.querySelector("#municipio").value = ibge;
+                    }
+                },
+                function(erro){
+                    console.log(erro);
+                },
+            )
+        } 
+    </script>
 </body>
 
 </html>

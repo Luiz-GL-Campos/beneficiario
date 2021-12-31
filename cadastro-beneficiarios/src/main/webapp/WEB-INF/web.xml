@@ -36,4 +36,20 @@
       /iniciar-cadastro
     </url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>
+      RealizarCadastro
+    </servlet-name>
+    <servlet-class>
+      br.gov.incra.beneficiarios.servlet.RealizarCadastroServlet
+    </servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>
+     RealizarCadastro
+    </servlet-name>
+    <url-pattern>
+      /realizar-cadastro
+    </url-pattern>
+  </servlet-mapping>
 </web-app>
