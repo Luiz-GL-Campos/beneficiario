@@ -11,4 +11,12 @@ public class EmailForm {
         this.cpf = beneficiarioForm.getCpf();
     }
 
+    public String getEmail() {
+        return this.email;
+    }
+
+    public String getCpf() {
+        return this.cpf;
+    }
+
 }

@@ -12,4 +12,17 @@ public class TelefoneForm {
         this.telefone = (String) req.getAttribute("telefone");
         this.cpf = beneficiarioForm.getCpf();
     }
+
+    public Long getIdTipoTelefone() {
+        return this.idTipoTelefone;
+    }
+
+    public String getTelefone() {
+        return this.telefone;
+    }
+
+    public String getCpf() {
+        return this.cpf;
+    }
+
 }

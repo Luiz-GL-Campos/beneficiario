@@ -10,6 +10,7 @@ import java.util.List;
 import br.gov.incra.beneficiario.form.BeneficiarioForm;
 import br.gov.incra.beneficiario.model.Beneficiario;
 import br.gov.incra.beneficiario.utilitaries.Conexao;
+import br.gov.incra.beneficiario.utilitaries.DataUtils;
 
 public class BeneficiarioDAO {
     public List<Beneficiario> listar() throws ClassNotFoundException, SQLException {
@@ -34,15 +35,17 @@ public class BeneficiarioDAO {
     public void cadastrar(BeneficiarioForm beneficiarioForm) throws ClassNotFoundException, SQLException {
         Connection conexao = Conexao.abrirConexao();
         String query = "insert into beneficiario.beneficiario (cpf_beneficiario, nome_beneficiario, data_nascimento_beneficiario, id_genero, id_escolaridade, numero_rg_beneficiario, orgao_emissor_rg, data_emissao_rg) "
-        + "values (?,?,?,?,?,?,?,?)" ;
+        + "values (?,?,?,?,?,?,?,?);" ;
         PreparedStatement preparedStatement = conexao.prepareStatement(query);
         preparedStatement.setString(1, beneficiarioForm.getCpf());
         preparedStatement.setString(2, beneficiarioForm.getNomeCompleto());
-        preparedStatement.setDate(3, beneficiarioForm.getDataNascimento());
+        preparedStatement.setDate(3, DataUtils.converterLocalDateParaSQLDate(beneficiarioForm.getDataNascimento()));
         preparedStatement.setLong(4, beneficiarioForm.getIdGenero());
         preparedStatement.setLong(5, beneficiarioForm.getIdEscolaridade());
         preparedStatement.setString(6, beneficiarioForm.getRg());
         preparedStatement.setString(7, beneficiarioForm.getOrgaoEmissor());
-        preparedStatement.setDate(8, beneficiarioForm.getDataEmissao());
+        preparedStatement.setDate(8, DataUtils.converterLocalDateParaSQLDate(beneficiarioForm.getDataEmissao()));
+
+        preparedStatement.executeUpdate();
     }
 }

@@ -22,4 +22,37 @@ public class EnderecoForm {
         this.municipio = (String) req.getAttribute("nomeMunicipio");
         this.cpf = beneficiarioForm.getCpf();
     }
+
+    public String getCep() {
+        return this.cep;
+    }
+
+    public String getBairro() {
+        return this.bairro;
+    }
+
+    public String getEndereco() {
+        return this.endereco;
+    }
+
+    public String getNumero() {
+        return this.numero;
+    }
+
+    public Long getEstado() {
+        return this.estado;
+    }
+
+    public Long getIdMunicipio() {
+        return this.idMunicipio;
+    }
+
+    public String getMunicipio() {
+        return this.municipio;
+    }
+
+    public String getCpf() {
+        return this.cpf;
+    }
+
 }
