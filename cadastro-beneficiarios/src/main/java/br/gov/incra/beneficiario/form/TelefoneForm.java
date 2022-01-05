@@ -8,8 +8,8 @@ public class TelefoneForm {
     private String cpf;
 
     public TelefoneForm(HttpServletRequest req, BeneficiarioForm beneficiarioForm) {
-        this.idTipoTelefone = (Long) req.getAttribute("selectTelefone");
-        this.telefone = (String) req.getAttribute("telefone");
+        this.idTipoTelefone = Long.valueOf(req.getParameter("selectTelefone"));
+        this.telefone = req.getParameter("telefone");
         this.cpf = beneficiarioForm.getCpf();
     }
 

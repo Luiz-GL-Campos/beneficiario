@@ -7,7 +7,7 @@ public class EmailForm {
     private String cpf;
 
     public EmailForm(HttpServletRequest req, BeneficiarioForm beneficiarioForm) {
-        this.email = (String) req.getAttribute("inputEmail");
+        this.email = req.getParameter("inputEmail");
         this.cpf = beneficiarioForm.getCpf();
     }
 

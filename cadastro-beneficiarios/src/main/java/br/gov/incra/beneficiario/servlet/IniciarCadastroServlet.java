@@ -48,6 +48,7 @@ public class IniciarCadastroServlet extends HttpServlet {
             req.setAttribute("tiposConta", listaTipoConta);
 
             req.getRequestDispatcher("pages/cadastrar.jsp").forward(req, resp);
+            
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }

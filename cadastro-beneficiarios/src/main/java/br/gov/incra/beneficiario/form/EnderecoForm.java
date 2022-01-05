@@ -13,13 +13,13 @@ public class EnderecoForm {
     private String cpf;
 
     public EnderecoForm(HttpServletRequest req, BeneficiarioForm beneficiarioForm) {
-        this.cep = (String) req.getAttribute("cep");
-        this.bairro = (String) req.getAttribute("bairro");
-        this.endereco = (String) req.getAttribute("endereco");
-        this.numero = (String) req.getAttribute("numero");
-        this.estado = (Long) req.getAttribute("estado");
-        this.idMunicipio = (Long) req.getAttribute("municipio");
-        this.municipio = (String) req.getAttribute("nomeMunicipio");
+        this.cep = req.getParameter("cep");
+        this.bairro = req.getParameter("bairro");
+        this.endereco = req.getParameter("endereco");
+        this.numero = req.getParameter("numero");
+        this.estado = Long.valueOf(req.getParameter("estado"));
+        this.idMunicipio = Long.valueOf(req.getParameter("municipio"));
+        this.municipio = req.getParameter("nomeMunicipio");
         this.cpf = beneficiarioForm.getCpf();
     }
 

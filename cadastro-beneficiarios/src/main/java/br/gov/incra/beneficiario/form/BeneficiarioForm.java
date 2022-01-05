@@ -1,29 +1,31 @@
 package br.gov.incra.beneficiario.form;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class BeneficiarioForm {
     private String nomeCompleto;
-    private LocalDate dataNascimento;
+    private Date dataNascimento;
     private String cpf;
     private String rg;
 
     private String orgaoEmissor;
-    private LocalDate dataEmissao;
+    private Date dataEmissao;
     private Long idGenero;
     private Long idEscolaridade;
     
     public BeneficiarioForm(HttpServletRequest req) {
-        this.nomeCompleto = (String) req.getAttribute("nome");
-        this.dataNascimento = (LocalDate) req.getAttribute("dataNascimento");
-        this.cpf = (String) req.getAttribute("cpf");
-        this.rg = (String) req.getAttribute("rg");
-        this.orgaoEmissor = (String) req.getAttribute("orgaoEmissor");
-        this.dataEmissao = (LocalDate) req.getAttribute("dataEmissao");
-        this.idGenero = (Long) req.getAttribute("selectGenero");
-        this.idEscolaridade = (Long) req.getAttribute("selectNEscolaridade");
+        System.out.println(req.getParameter("nomeCompleto"));
+        this.nomeCompleto = req.getParameter("nomeCompleto");
+        this.dataNascimento = Date.valueOf(req.getParameter("dataNascimento"));
+        this.cpf = req.getParameter("cpf");
+        this.rg = req.getParameter("rg");
+        this.orgaoEmissor = req.getParameter("orgaoEmissor");
+        System.out.println(req.getParameter("dataEmissao"));
+        this.dataEmissao = req.getParameter("dataEmissao").isBlank() ? Date.valueOf(req.getParameter("dataEmissao")) : null;
+        this.idGenero = Long.valueOf(req.getParameter("selectGenero"));
+        this.idEscolaridade = Long.valueOf(req.getParameter("selectNEscolaridade"));
     }
     
     public String getCpf() {
@@ -34,7 +36,7 @@ public class BeneficiarioForm {
         return this.nomeCompleto;
     }
     
-    public LocalDate getDataNascimento() {
+    public Date getDataNascimento() {
         return this.dataNascimento;
     }
     
@@ -46,7 +48,7 @@ public class BeneficiarioForm {
         return this.orgaoEmissor;
     }
     
-    public LocalDate getDataEmissao() {
+    public Date getDataEmissao() {
         return this.dataEmissao;
     }
     

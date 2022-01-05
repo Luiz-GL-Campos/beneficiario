@@ -2,14 +2,14 @@ package br.gov.incra.beneficiario.form;
 
 import javax.servlet.http.HttpServletRequest;
 
-public class MunicipioForm {
+public class  MunicipioForm {
     private Long idMunicipio;
     private String nomeMunicipio;
     private Long idEstado;
 
     public MunicipioForm(HttpServletRequest req, EnderecoForm enderecoForm){
-        this.idMunicipio = (Long) req.getAttribute("municipio");
-        this.nomeMunicipio = (String) req.getAttribute("municipio");
+        this.idMunicipio = Long.valueOf(req.getParameter("municipio"));
+        this.nomeMunicipio = req.getParameter("municipio");
         this.idEstado = enderecoForm.getEstado();
     }
 

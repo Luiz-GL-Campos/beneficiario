@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import br.gov.incra.beneficiario.form.MunicipioForm;
+import br.gov.incra.beneficiario.form.EnderecoForm;
 import br.gov.incra.beneficiario.utilitaries.Conexao;
 
 public class MunicipioDAO {
@@ -22,14 +22,14 @@ public class MunicipioDAO {
     
     }
     
-    public void cadastrar(MunicipioForm municipioForm) throws ClassNotFoundException, SQLException {
+    public void cadastrar(EnderecoForm enderecoForm) throws ClassNotFoundException, SQLException {
         Connection conexao = Conexao.abrirConexao();
         String query = "insert into beneficiario.municipio (id_municipio, nome_municipio, id_estado) values(?,?,?)";
     
         PreparedStatement preparedStatement = conexao.prepareStatement(query);
-        preparedStatement.setLong(1, municipioForm.getIdMunicipio());
-        preparedStatement.setString(2, municipioForm.getNomeMunicipio());
-        preparedStatement.setLong(3, municipioForm.getIdEstado());
+        preparedStatement.setLong(1, enderecoForm.getIdMunicipio());
+        preparedStatement.setString(2, enderecoForm.getMunicipio());
+        preparedStatement.setLong(3, enderecoForm.getEstado());
 
         preparedStatement.executeUpdate();
     }

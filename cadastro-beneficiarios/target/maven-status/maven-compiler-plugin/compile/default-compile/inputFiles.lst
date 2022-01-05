@@ -10,6 +10,7 @@ C:\Mirante\beneficiario\cadastro-beneficiarios\src\main\java\br\gov\incra\benefi
 C:\Mirante\beneficiario\cadastro-beneficiarios\src\main\java\br\gov\incra\beneficiario\model\Genero.java
 C:\Mirante\beneficiario\cadastro-beneficiarios\src\main\java\br\gov\incra\beneficiario\model\Banco.java
 C:\Mirante\beneficiario\cadastro-beneficiarios\src\main\java\br\gov\incra\beneficiario\dao\BeneficiarioDAO.java
+C:\Mirante\beneficiario\cadastro-beneficiarios\src\main\java\br\gov\incra\beneficiario\service\SituacaoBeneficiarioService.java
 C:\Mirante\beneficiario\cadastro-beneficiarios\src\main\java\br\gov\incra\beneficiario\dao\MunicipioDAO.java
 C:\Mirante\beneficiario\cadastro-beneficiarios\src\main\java\br\gov\incra\beneficiario\model\TipoTelefone.java
 C:\Mirante\beneficiario\cadastro-beneficiarios\src\main\java\br\gov\incra\beneficiario\form\MunicipioForm.java
@@ -40,4 +41,5 @@ C:\Mirante\beneficiario\cadastro-beneficiarios\src\main\java\br\gov\incra\benefi
 C:\Mirante\beneficiario\cadastro-beneficiarios\src\main\java\br\gov\incra\beneficiario\servlet\RealizarCadastroServlet.java
 C:\Mirante\beneficiario\cadastro-beneficiarios\src\main\java\br\gov\incra\beneficiario\dao\TelefoneDAO.java
 C:\Mirante\beneficiario\cadastro-beneficiarios\src\main\java\br\gov\incra\beneficiario\form\ContaForm.java
+C:\Mirante\beneficiario\cadastro-beneficiarios\src\main\java\br\gov\incra\beneficiario\service\MunicipioService.java
 C:\Mirante\beneficiario\cadastro-beneficiarios\src\main\java\br\gov\incra\beneficiario\dao\TipoCantaDAO.java

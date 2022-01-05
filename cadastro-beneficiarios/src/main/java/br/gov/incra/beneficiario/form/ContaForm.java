@@ -10,10 +10,10 @@ public class ContaForm {
     private String cpf;
 
     public ContaForm(HttpServletRequest req, BeneficiarioForm beneficiarioForm) {
-        this.idTipoConta = (Long) req.getAttribute("selectTipoConta");
-        this.numeroConta = (String) req.getAttribute("numeroConta");
-        this.agencia = (String) req.getAttribute("agencia");
-        this.codBanco = (Long) req.getAttribute("selectBanco");
+        this.idTipoConta = Long.valueOf(req.getParameter("selectTipoConta"));
+        this.numeroConta = req.getParameter("numeroConta");
+        this.agencia = req.getParameter("agencia");
+        this.codBanco = Long.valueOf(req.getParameter("selectBanco"));
         this.cpf = beneficiarioForm.getCpf();
     }
 

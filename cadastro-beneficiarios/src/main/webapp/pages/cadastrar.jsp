@@ -53,87 +53,87 @@
                 <input type="hidden" id="nomeMunicipio"/>
                 <div class="mb-3">
                     <label for="nome" class="form-label">Nome Completo</label>
-                    <input type="name" class="form-control" id="nome">
+                    <input type="text" name="nomeCompleto" class="form-control" id="nomeCompleto" required>
                 </div>
                 <div class="row">
                     <div class="col">
                         <div class="mb-3">
                             <label for="dataNascimento" class="form-label">Data de Nascimento</label>
-                            <input type="date" class="form-control" id="dataNascimento">
+                            <input type="date" class="form-control" id="dataNascimento" name="dataNascimento" required>
                         </div>
                     </div>
                     <div class="col">
                         <div class="mb-3">
                             <label for="cpf" class="form-label">CPF</label>
-                            <input type="text" class="form-control" id="cpf">
+                            <input type="text" name="cpf" class="form-control" id="cpf" required>
                         </div>
                     </div>
                     <div class="col">
                         <div class="mb-3">
                             <label for="rg" class="form-label">RG</label>
-                            <input type="text" class="form-control" id="rg">
+                            <input type="text" name="rg" class="form-control" id="rg">
                         </div>
                     </div>
                     <div class="col">
                         <div class="mb-3">
                             <label for="orgaoEmissor" class="form-label">Orgao emissor</label>
-                            <input type="text" class="form-control" id="orgaoEmissor">
+                            <input type="text" name="orgaoEmissor" class="form-control" id="orgaoEmissor">
                         </div>
                     </div>
                     <div class="col">
                         <div class="mb-3">
                             <label for="dataEmissao" class="form-label">Data de emissao</label>
-                            <input type="date" class="form-control" id="dataEmissao">
+                            <input type="date" name="dataEmissao" class="form-control" id="dataEmissao">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <label for="genero" class="form-label">Genero</label>
-                        <select id="selectGenero" class="form-select" aria-label="Default select example">
+                        <select id="selectGenero" name="selectGenero" class="form-select" aria-label="Default select example">
                             <c:forEach var="genero" items="${generos}">                              
-                                <option value="genero.idGenero"><c:out value="${genero.tipoGenero}"/></option>                                  
+                                <option value="<c:out value='${genero.idGenero}'/>"><c:out value="${genero.tipoGenero}"/></option>                                 
                             </c:forEach>
                         </select>
                     </div>
                     <div class="col">
                         <label for="nivelEscolaridade" class="form-label">Nivel Escolaridade</label>
-                        <select id="selectNEscolaridade" class="form-select" aria-label="Default select example">
+                        <select id="selectNEscolaridade" name="selectNEscolaridade" class="form-select" aria-label="Default select example">
                             <c:forEach var="escolaridade" items="${escolaridades}">                              
-                                <option value="escolaridade.idEscolaridade"><c:out value="${escolaridade.nivelEscolaridade}"/></option>                                  
+                                <option value="<c:out value='${escolaridade.idEscolaridade}'/>"><c:out value="${escolaridade.nivelEscolaridade}"/></option>                                  
                             </c:forEach>
                         </select>
                     </div>
                     <div class="col">
                         <label for="tipoTelefone" class="form-label">Tipo de Telefone</label>
-                        <select id="selectTelefone" class="form-select" aria-label="Default select example">
+                        <select id="selectTelefone" name="selectTelefone" class="form-select" aria-label="Default select example">
                             <c:forEach var="tipoTelefone" items="${tiposTelefone}">                              
-                                <option value="tipoTelefone.idTipoTelefone"><c:out value="${tipoTelefone.descricaoTipoTelefone}"/></option>                                  
+                                <option value="<c:out value='${tipoTelefone.idTipoTelefone}'/>"><c:out value="${tipoTelefone.descricaoTipoTelefone}"/></option>                                  
                             </c:forEach>
                         </select>
                     </div>
                     <div class="col">
                         <div class="mb-3">
                             <label for="telefone" class="form-label">Telefone</label>
-                            <input type="text" class="form-control" id="telefone">
+                            <input type="text" name="telefone" class="form-control" id="telefone" required>
                         </div>
                     </div>
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp">
+                  <input type="email" name="inputEmail" class="form-control" id="inputEmail" aria-describedby="emailHelp" required>
                   <div id="emailHelp" class="form-text">Nos nunca compartilharemos seu email com mas ninguem.</div>
                 </div>
                 <div class="row">
                     <div class="col">
                         <div class="mb-3">
                             <label for="cep" class="form-label">CEP</label>
-                            <input type="text" class="form-control" id="cep" onkeyup="consultaCep()">
+                            <input type="text" name="cep" class="form-control" id="cep" onkeyup="consultaCep()" required>
                         </div>
                     </div>
                     <div class="col">
                         <label for="uf" class="form-label">UF</label>
-                        <select class="form-select" aria-label="Default select example" id="estado" onchange="consultaUf()">
+                        <select id="estado" name="estado" class="form-select" aria-label="Default select example" onchange="consultaUf()">
                             <c:forEach var="estado" items="${estados}">                              
                                 <option value="<c:out value='${estado.idEstado}'/>"><c:out value="${estado.siglaEstado}"/></option>                                  
                             </c:forEach>
@@ -142,25 +142,25 @@
                     <div class="col">
                         <div class="mb-3">
                             <label for="municipio" class="form-label">Municipio</label>
-                            <select name="option" class="form-control" id="municipio" onchange="obtemNomeMunicipio(this)"></select>
+                            <select name="municipio" class="form-control" id="municipio" onchange="obtemNomeMunicipio(this)"></select>
                         </div>
                     </div>
                     <div class="col">
                         <div class="mb-3">
                             <label for="bairro" class="form-label">Bairro</label>
-                            <input type="text" class="form-control" id="bairro">
+                            <input type="text" name="bairro" class="form-control" id="bairro" required>
                         </div>
                     </div>
                     <div class="col">
                         <div class="mb-3">
                             <label for="endereco" class="form-label">Endereco</label>
-                            <input type="text" class="form-control" id="endereco">
+                            <input type="text" name="endereco" class="form-control" id="endereco" required>
                         </div>
                     </div>
                     <div class="col">
                         <div class="mb-3">
                             <label for="numero" class="form-label">Numero</label>
-                            <input type="text" class="form-control" id="numero">
+                            <input type="text" name="numero" class="form-control" id="numero" required>
                         </div>
                     </div>
                 </div>
@@ -168,9 +168,9 @@
                     <div class="col">
                         <div class="mb-3">
                             <label for="banco" class="form-label">Banco</label>
-                            <select id="selectBanco" class="form-select" aria-label="Default select example">
+                            <select id="selectBanco" name="selectBanco" class="form-select" aria-label="Default select example">
                                 <c:forEach var="banco" items="${bancos}">                              
-                                    <option value="banco.codBanco"><c:out value="${banco.nomeBanco}"/></option>                                  
+                                    <option value="<c:out value='${banco.codBanco}'/>"><c:out value="${banco.nomeBanco}"/></option>                                  
                                 </c:forEach>
                             </select>
                         </div>
@@ -178,21 +178,21 @@
                     <div class="col">
                         <div class="mb-3">
                             <label for="agencia" class="form-label">Agencia</label>
-                            <input type="text" class="form-control" id="agencia">
+                            <input type="text" name="agencia" class="form-control" id="agencia" required>
                         </div>
                     </div>
                     <div class="col">
                         <div class="mb-3">
                             <label for="numeroConta" class="form-label">Numero da Conta</label>
-                            <input type="text" class="form-control" id="numeroConta">
+                            <input type="text" name="numeroConta" class="form-control" id="numeroConta" required>
                         </div>
                     </div>
                     <div class="col">
                         <div class="mb-3">
                             <label for="tipoConta" class="form-label">Tipo de Conta</label>
-                            <select id="selectTipoConta" class="form-select" aria-label="Default select example">
+                            <select id="selectTipoConta" name="selectTipoConta" class="form-select" aria-label="Default select example">
                                 <c:forEach var="tipoConta" items="${tiposConta}">                              
-                                    <option value="tipoConta.idTipoConta"><c:out value="${tipoConta.tipoConta}"/></option>                                  
+                                    <option value="<c:out value='${tipoConta.idTipoConta}'/>"><c:out value="${tipoConta.tipoConta}"/></option>                                  
                                 </c:forEach>
                             </select>
                         </div>
